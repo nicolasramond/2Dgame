@@ -156,6 +156,29 @@ Q.scene("level1",function(stage) {
       stage.insert(new Q.Tower({ x: 950, y: 433 }));
     });
 
+    // Create a new scene called level 1
+    Q.scene("level3",function(stage) {
+      alert("ici")
+      // Add in a tile layer, and make it the collision layer
+      stage.collisionLayer(new Q.TileLayer({
+        dataAsset: 'level3.json',
+        sheet:     'tiles' }));
+
+        // Create the player and add him to the stage
+        var player = stage.insert(new Q.Player());
+
+        // Give the stage a moveable viewport and tell it
+        // to follow the player.
+        stage.add("viewport").follow(player);
+
+        // Add in a couple of enemies
+        stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+        stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+
+        // Finally add in the tower goal
+        stage.insert(new Q.Tower({ x: 180, y: 50 }));
+      });
+
     // To display a game over / game won popup box,
     // create a endGame scene that takes in a `label` option
     // to control the displayed message.
@@ -202,7 +225,7 @@ Q.scene("level1",function(stage) {
 
         // Q.load can be called at any time to load additional assets
         // assets that are already loaded will be skipped
-        Q.load("sprites.png, sprites.json, level2.json, level.json, tiles.png",
+        Q.load("sprites.png, sprites.json, level3.json, level2.json, level.json, tiles.png",
         // The callback will be triggered when everything is loaded
         function() {
           // Sprites sheets can be created manually
@@ -212,5 +235,5 @@ Q.scene("level1",function(stage) {
           Q.compileSheets("sprites.png","sprites.json");
 
           // Finally, call stageScene to run the game
-          Q.stageScene("level2");
+          Q.stageScene("level1");
         });
